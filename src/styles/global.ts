@@ -13,6 +13,7 @@ export default createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.background.primary};
     color: #FFFFFF;
     font: 700 16px Mukta, sans-serif;
+    transition: all 0.5s;
   }
 
   #__next {
