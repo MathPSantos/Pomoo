@@ -12,9 +12,7 @@ const Home: React.FC = () => {
         <title>Pomooo</title>
       </Head>
 
-      <main>
-        <h1 onClick={() => toggleTheme('lightBlue')}>Pomoo</h1>
-      </main>
+      <main></main>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { ThemeProvider, DefaultTheme } from 'styled-components'
 
 import { redTheme, lightBlueTheme, darkBlueTheme } from '../styles/theme/'
 
-type Theme = any
+type Theme = DefaultTheme
 type ThemeContext = { theme: Theme; toggleTheme: (color: ThemeColor) => void }
 
 export const NewThemeContext = React.createContext<ThemeContext>(
