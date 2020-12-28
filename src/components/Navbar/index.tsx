@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Container, Content, GithubIcon, SettingsIcon } from './styles'
 
+import { Flat } from '../Button/'
+
 const Navbar: React.FC = () => {
   return (
     <Container>
@@ -19,7 +21,7 @@ const Navbar: React.FC = () => {
             />
           </div>
 
-          {/* <button>Donate</button> */}
+          <Flat label="Donate" />
         </div>
       </Content>
     </Container>
