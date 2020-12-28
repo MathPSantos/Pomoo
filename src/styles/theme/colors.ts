@@ -43,7 +43,7 @@ export const redColors = {
   }
 }
 
-export const lightBlueolors = {
+export const lightBlueColors = {
   background: {
     primary: colors.lightBlue.primary,
     secondary: colors.lightBlue.secondary

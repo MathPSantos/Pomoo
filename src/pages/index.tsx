@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Head from 'next/head'
 
+import { NewThemeContext } from '../contexts/theme'
+
 const Home: React.FC = () => {
+  const { toggleTheme } = useContext(NewThemeContext)
+
   return (
     <div>
       <Head>
@@ -9,7 +13,7 @@ const Home: React.FC = () => {
       </Head>
 
       <main>
-        <h1>Pomoo</h1>
+        <h1 onClick={() => toggleTheme('lightBlue')}>Pomoo</h1>
       </main>
     </div>
   )
