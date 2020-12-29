@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   const audioElement = useRef(null)
   const [intervalId, setIntervalId] = useState(null)
   const [session, setSession] = useState<Session>(0)
-  const [timeLeft, setTimeLeft] = useState(15)
+  const [timeLeft, setTimeLeft] = useState(60 * 25)
 
   const isStarted = intervalId !== null
 
