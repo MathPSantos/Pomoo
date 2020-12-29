@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Container, Content, GithubIcon, SettingsIcon } from './styles'
 
-import { Flat } from '../Button/'
+// import { Flat } from '../Button/'
 
 const Navbar: React.FC = () => {
   return (
@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
             />
           </div>
 
-          <Flat label="Donate" />
+          {/* <Flat label="Donate" /> */}
         </div>
       </Content>
     </Container>
