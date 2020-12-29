@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import Head from 'next/head'
 
 import { NewThemeContext } from '../contexts/theme'
@@ -9,35 +9,65 @@ import { Main } from '../components/Layout/styles'
 
 import { Section, LandContent, Timer } from '../styles/pages/'
 
-type Interval = 0 | 1 | 2
+type Session = 0 | 1 | 2
 
 const Home: React.FC = () => {
   const { toggleTheme } = useContext(NewThemeContext)
 
-  const [interval, setInterval] = useState<Interval>(0)
-  const [time, setTime] = useState(1500)
+  const audioElement = useRef(null)
+  const [intervalId, setIntervalId] = useState(null)
+  const [session, setSession] = useState<Session>(0)
+  const [timeLeft, setTimeLeft] = useState(15)
 
-  const handleInterval = (value: 0 | 1 | 2) => {
-    setInterval(value)
+  const isStarted = intervalId !== null
+
+  const handleSession = (value: 0 | 1 | 2) => {
+    setSession(value)
+
+    if (isStarted) {
+      clearInterval(intervalId)
+      setIntervalId(null)
+    }
 
     switch (value) {
       // Pomodoro
       case 0:
-        setTime(1500)
+        setTimeLeft(60 * 25)
         return toggleTheme('red')
         break
 
       // Small break
       case 1:
-        setTime(300)
+        setTimeLeft(60 * 5)
         return toggleTheme('lightBlue')
         break
 
       // Long break
       case 2:
-        setTime(900)
+        setTimeLeft(60 * 15)
         return toggleTheme('darkBlue')
         break
+    }
+  }
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      audioElement.current.play()
+
+      if (session === 0) handleSession(1)
+      else handleSession(0)
+    }
+  }, [timeLeft])
+
+  const handleStartStopClick = () => {
+    if (isStarted) {
+      clearInterval(intervalId)
+      setIntervalId(null)
+    } else {
+      const newIntervalId = setInterval(() => {
+        setTimeLeft(prevTimeLeft => prevTimeLeft - 1)
+      }, 100)
+      setIntervalId(newIntervalId)
     }
   }
 
@@ -52,35 +82,48 @@ const Home: React.FC = () => {
           <LandContent>
             <Timer>
               <div className="intervals-container">
-                {interval === 0 ? (
-                  <Flat onClick={() => handleInterval(0)} label="Pomodoro" />
+                {session === 0 ? (
+                  <Flat onClick={() => handleSession(0)} label="Pomodoro" />
                 ) : (
-                  <Outline onClick={() => handleInterval(0)} label="Pomodoro" />
+                  <Outline onClick={() => handleSession(0)} label="Pomodoro" />
                 )}
 
-                {interval === 1 ? (
-                  <Flat onClick={() => handleInterval(1)} label="Small break" />
+                {session === 1 ? (
+                  <Flat onClick={() => handleSession(1)} label="Small break" />
                 ) : (
                   <Outline
-                    onClick={() => handleInterval(1)}
+                    onClick={() => handleSession(1)}
                     label="Small break"
                   />
                 )}
 
-                {interval === 2 ? (
-                  <Flat onClick={() => handleInterval(2)} label="Long break" />
+                {session === 2 ? (
+                  <Flat onClick={() => handleSession(2)} label="Long break" />
                 ) : (
                   <Outline
-                    onClick={() => handleInterval(2)}
+                    onClick={() => handleSession(2)}
                     label="Long break"
                   />
                 )}
               </div>
 
-              <span>{time / 60}:00</span>
+              <span>
+                {new Date(timeLeft * 1000).toISOString().substr(14, 5)}
+              </span>
 
-              <Flat block label="Start" />
+              <Flat
+                block
+                label={isStarted ? 'Stop' : 'Start'}
+                onClick={handleStartStopClick}
+              />
             </Timer>
+
+            <audio ref={audioElement}>
+              <source
+                src="https://onlineclock.net/audio/options/default.mp3"
+                type="audio/mpeg"
+              />
+            </audio>
           </LandContent>
         </Section>
       </Main>
