@@ -1,3 +1,3 @@
 export { default as Flat } from './Flat'
 
-export { default as Outline } from './Outline'
+export { default as TimerButton } from './TimerButton'

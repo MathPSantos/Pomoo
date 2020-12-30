@@ -1,1 +1,10 @@
-export { FiSettings, FiGithub } from 'react-icons/fi'
+export {
+  FiSettings,
+  FiGithub,
+  FiEdit,
+  FiPlus,
+  FiTrash,
+  FiXCircle,
+  FiSave,
+  FiMinus
+} from 'react-icons/fi'
