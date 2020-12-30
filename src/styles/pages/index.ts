@@ -86,7 +86,7 @@ export const TaskItemsGrid = styled.div`
 
     display: grid;
     grid-template-columns: 256px 256px;
-    grid-auto-rows: 248px;
+    grid-auto-rows: 256px;
     grid-column-gap: 32px;
     grid-row-gap: 32px;
 

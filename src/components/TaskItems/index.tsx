@@ -6,11 +6,14 @@ import {
   Content,
   NewTaskContent,
   Info,
+  InfoEdit,
   PomooBox,
+  PomooEdit,
   Pomoo,
   EditIcon,
   RemoveIcon,
-  PlusIcon
+  PlusIcon,
+  MinusIcon
 } from './styles'
 
 import { Props } from './interface'
@@ -69,11 +72,31 @@ export const TaskItem: React.FC<Props> = ({
               maxLength="40"
             />
 
-            <Info>
-              <PomooBox>{pomooRows}</PomooBox>
+            <InfoEdit>
+              <PomooEdit>
+                <button>
+                  <MinusIcon />
+                </button>
 
-              <RemoveIcon onClick={() => setEdit(false)} />
-            </Info>
+                <p>1</p>
+
+                <button>
+                  <PlusIcon />
+                </button>
+              </PomooEdit>
+
+              <div className="bottom-tab">
+                <RemoveIcon />
+
+                <div className="right-tab">
+                  <p className="cancel" onClick={() => setEdit(false)}>
+                    Cancel
+                  </p>
+
+                  <p className="save">Save</p>
+                </div>
+              </div>
+            </InfoEdit>
           </>
         )}
       </Content>

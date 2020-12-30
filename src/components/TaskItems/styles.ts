@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { FiEdit, FiTrash, FiPlus } from '../../styles/icons'
+import { FiEdit, FiTrash, FiPlus, FiMinus } from '../../styles/icons'
 
 import { PomooStyledProps } from './interface'
 
@@ -22,6 +22,8 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
+  position: relative;
+
   width: 100%;
   height: 100%;
   min-height: 172px;
@@ -57,6 +59,51 @@ export const Info = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+export const InfoEdit = styled(Info)`
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  .bottom-tab {
+    width: 100%;
+
+    margin-top: 6px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .right-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        cursor: pointer;
+      }
+
+      p + p {
+        margin-left: 12px;
+      }
+
+      .cancel {
+        font: 800 16px Mukta, sans-serif;
+        color: ${({ theme }) => theme.colors.typography.secondary};
+        text-decoration: underline;
+      }
+
+      .save {
+        padding: 4px 10px;
+        font: 800 16px Mukta, sans-serif;
+        color: ${({ theme }) => theme.colors.typography.primary};
+        background-color: ${({ theme }) => theme.colors.background.secondary};
+
+        border-radius: 4px;
+      }
+    }
+  }
 `
 
 export const Pomoo = styled.div<PomooStyledProps>`
@@ -97,6 +144,38 @@ export const PomooBox = styled.div`
   }
 `
 
+export const PomooEdit = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 4px;
+
+    background: ${({ theme }) => theme.colors.background.secondary};
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    svg {
+      color: ${({ theme }) => theme.colors.background.primary};
+    }
+  }
+
+  p {
+    font-size: 20px;
+    padding: 0 12px;
+  }
+`
+
 const iconCSS = css`
   flex-shrink: 0;
 
@@ -107,7 +186,7 @@ const iconCSS = css`
 
   cursor: pointer;
   opacity: 0.95;
-  transition: 0.4s all;
+  transition: 0.3s all;
 
   &:hover {
     opacity: 1;
@@ -119,6 +198,10 @@ export const EditIcon = styled(FiEdit)`
 `
 
 export const RemoveIcon = styled(FiTrash)`
+  ${iconCSS}
+`
+
+export const MinusIcon = styled(FiMinus)`
   ${iconCSS}
 `
 
