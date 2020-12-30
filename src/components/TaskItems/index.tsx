@@ -67,9 +67,9 @@ export const TaskItem: React.FC<Props> = ({
             <textarea
               placeholder="Your text tittle here"
               autoFocus
-              rows="3"
-              cols="20"
-              maxLength="40"
+              rows={3}
+              cols={20}
+              maxLength={40}
             />
 
             <InfoEdit>
