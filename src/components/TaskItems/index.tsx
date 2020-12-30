@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Container,
@@ -9,10 +9,11 @@ import {
   PomooBox,
   Pomoo,
   EditIcon,
+  RemoveIcon,
   PlusIcon
 } from './styles'
 
-import { Props, PomooProps } from './interface'
+import { Props } from './interface'
 
 export const NewTaskItem: React.FC = () => {
   return (
@@ -26,10 +27,13 @@ export const NewTaskItem: React.FC = () => {
   )
 }
 
-export const TaskItem: React.FC<Props> = (
-  { title, pomoos, finishedPomoos }: Props,
-  { done }: PomooProps
-) => {
+export const TaskItem: React.FC<Props> = ({
+  title,
+  pomoos,
+  finishedPomoos
+}: Props) => {
+  const [edit, setEdit] = useState(false)
+
   const pomooRows = []
 
   for (let i = 0; i < pomoos; i++) {
@@ -45,13 +49,33 @@ export const TaskItem: React.FC<Props> = (
   return (
     <Container>
       <Content>
-        <span>{title}</span>
+        {!edit ? (
+          <>
+            <span>{title}</span>
 
-        <Info>
-          <PomooBox>{pomooRows}</PomooBox>
+            <Info>
+              <PomooBox>{pomooRows}</PomooBox>
 
-          <EditIcon />
-        </Info>
+              <EditIcon onClick={() => setEdit(true)} />
+            </Info>
+          </>
+        ) : (
+          <>
+            <textarea
+              placeholder="Your text tittle here"
+              autoFocus
+              rows="3"
+              cols="20"
+              maxLength="40"
+            />
+
+            <Info>
+              <PomooBox>{pomooRows}</PomooBox>
+
+              <RemoveIcon onClick={() => setEdit(false)} />
+            </Info>
+          </>
+        )}
       </Content>
     </Container>
   )

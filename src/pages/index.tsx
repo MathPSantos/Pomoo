@@ -26,7 +26,7 @@ const Home: React.FC = () => {
   const [session, setSession] = useState<Session>(0)
   const [timeLeft, setTimeLeft] = useState(60 * 25)
 
-  const [tasks, setTasks] = useState<TaskProps[]>()
+  const [tasks, setTasks] = useState<TaskProps[]>([])
 
   const isStarted = intervalId !== null
 

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { FiEdit, FiPlus } from '../../styles/icons'
+import { FiEdit, FiTrash, FiPlus } from '../../styles/icons'
 
 import { PomooStyledProps } from './interface'
 
@@ -35,6 +35,19 @@ export const Content = styled.div`
 
   span {
     font-size: 24px;
+  }
+
+  textarea {
+    width: 100%;
+    background: none;
+    border: none;
+    resize: none;
+    font: 700 24px Mukta, sans-serif;
+    color: ${({ theme }) => theme.colors.typography.secondary};
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
   }
 `
 
@@ -102,6 +115,10 @@ const iconCSS = css`
 `
 
 export const EditIcon = styled(FiEdit)`
+  ${iconCSS}
+`
+
+export const RemoveIcon = styled(FiTrash)`
   ${iconCSS}
 `
 
