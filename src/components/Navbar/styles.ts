@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { FiSettings, FiGithub } from '../../styles/icons'
 
 export const Container = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;

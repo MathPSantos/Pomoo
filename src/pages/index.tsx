@@ -3,11 +3,18 @@ import Head from 'next/head'
 
 import { NewThemeContext } from '../contexts/theme'
 
-import { Flat, Outline } from '../components/Button'
-
 import { Main } from '../components/Layout/styles'
+import { Flat, TimerButton } from '../components/Button'
+import { TaskItem, NewTaskItem } from '../components/TaskItems'
+import { Props as TaskProps } from '../components/TaskItems/interface'
 
-import { Section, LandContent, Timer } from '../styles/pages/'
+import {
+  Section,
+  LandContent,
+  Timer,
+  Tasks,
+  TaskItemsGrid
+} from '../styles/pages/'
 
 type Session = 0 | 1 | 2
 
@@ -19,9 +26,33 @@ const Home: React.FC = () => {
   const [session, setSession] = useState<Session>(0)
   const [timeLeft, setTimeLeft] = useState(60 * 25)
 
+  const [tasks, setTasks] = useState<TaskProps[]>()
+
   const isStarted = intervalId !== null
 
-  const handleSession = (value: 0 | 1 | 2) => {
+  useEffect(() => {
+    const initialTasks = [
+      {
+        title: 'Do math homework',
+        pomoos: 4,
+        finishedPomoos: 1
+      },
+      {
+        title: 'Clean bedroom',
+        pomoos: 2,
+        finishedPomoos: 1
+      },
+      {
+        title: 'Have a lunch',
+        pomoos: 6,
+        finishedPomoos: 2
+      }
+    ]
+
+    setTasks(initialTasks)
+  }, [])
+
+  const handleSession = (value: Session) => {
     setSession(value)
 
     if (isStarted) {
@@ -82,29 +113,23 @@ const Home: React.FC = () => {
           <LandContent>
             <Timer>
               <div className="intervals-container">
-                {session === 0 ? (
-                  <Flat onClick={() => handleSession(0)} label="Pomodoro" />
-                ) : (
-                  <Outline onClick={() => handleSession(0)} label="Pomodoro" />
-                )}
+                <TimerButton
+                  active={session === 0}
+                  onClick={() => handleSession(0)}
+                  label="Pomodoro"
+                />
 
-                {session === 1 ? (
-                  <Flat onClick={() => handleSession(1)} label="Small break" />
-                ) : (
-                  <Outline
-                    onClick={() => handleSession(1)}
-                    label="Small break"
-                  />
-                )}
+                <TimerButton
+                  active={session === 1}
+                  onClick={() => handleSession(1)}
+                  label="Small break"
+                />
 
-                {session === 2 ? (
-                  <Flat onClick={() => handleSession(2)} label="Long break" />
-                ) : (
-                  <Outline
-                    onClick={() => handleSession(2)}
-                    label="Long break"
-                  />
-                )}
+                <TimerButton
+                  active={session === 2}
+                  onClick={() => handleSession(2)}
+                  label="Long break"
+                />
               </div>
 
               <span>
@@ -118,13 +143,29 @@ const Home: React.FC = () => {
               />
             </Timer>
 
-            <audio ref={audioElement}>
-              <source
-                src="https://onlineclock.net/audio/options/default.mp3"
-                type="audio/mpeg"
-              />
-            </audio>
+            <Tasks>
+              <h2>Tasks</h2>
+
+              <TaskItemsGrid>
+                {tasks.map((item, index) => (
+                  <TaskItem
+                    key={index}
+                    title={item.title}
+                    pomoos={item.pomoos}
+                    finishedPomoos={item.finishedPomoos}
+                  />
+                ))}
+                <NewTaskItem />
+              </TaskItemsGrid>
+            </Tasks>
           </LandContent>
+
+          <audio ref={audioElement}>
+            <source
+              src="https://onlineclock.net/audio/options/default.mp3"
+              type="audio/mpeg"
+            />
+          </audio>
         </Section>
       </Main>
     </>

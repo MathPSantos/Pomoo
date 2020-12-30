@@ -1,9 +1,9 @@
 export interface Props {
-  variant?: 'primary' | 'secondary'
+  active: boolean
   label: string
   onClick?: () => void
 }
 
 export interface StyledProps {
-  variant?: 'primary' | 'secondary'
+  active: boolean
 }

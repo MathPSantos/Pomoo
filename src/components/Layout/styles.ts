@@ -34,7 +34,7 @@ export const DefContent = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (min-width: 7200px) {
+  @media screen and (min-width: 720px) {
     flex-direction: row;
     justify-content: space-between;
   }

@@ -3,7 +3,7 @@ import { Props } from './interface'
 
 import { Container } from './styles'
 
-const Flat: React.FC<Props> = ({ label, onClick, ...rest }: Props) => {
+const TimerButton: React.FC<Props> = ({ label, onClick, ...rest }: Props) => {
   return (
     <Container onClick={onClick} {...rest}>
       {label}
@@ -11,4 +11,4 @@ const Flat: React.FC<Props> = ({ label, onClick, ...rest }: Props) => {
   )
 }
 
-export default Flat
+export default TimerButton
