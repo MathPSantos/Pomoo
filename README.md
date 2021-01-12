@@ -121,7 +121,7 @@ To install dependencies and initialize the project, you can use **Yarn** or **NP
 
 ## 🎨 Prototype
 
-Pomooo prototype was made at figma and you can see in this [link](https://code.visualstudio.com/)!
+Pomooo prototype was made at figma and you can see in this [link](https://www.figma.com/file/KDnbJJp6sywxt7PaVoMXmL/Pomoo?node-id=65%3A5)!
 
 ---
  
