@@ -36,13 +36,14 @@ export const TaskItem: React.FC<Props> = ({
   finishedPomoos
 }: Props) => {
   const [edit, setEdit] = useState(false)
+  const [pomoosQty, setPomoosQty] = useState(1)
 
   const pomooRows = []
 
   for (let i = 0; i < pomoos; i++) {
-    const done = finishedPomoos - 1
+    const donePomoos = finishedPomoos - 1
 
-    if (i <= done) {
+    if (i <= donePomoos) {
       pomooRows.push(<Pomoo done={true} key={i} />)
     } else {
       pomooRows.push(<Pomoo done={false} key={i} />)
@@ -74,13 +75,19 @@ export const TaskItem: React.FC<Props> = ({
 
             <InfoEdit>
               <PomooEdit>
-                <button>
+                <button
+                  disabled={pomoosQty <= 0}
+                  onClick={() => setPomoosQty(pomoosQty - 1)}
+                >
                   <MinusIcon />
                 </button>
 
-                <p>1</p>
+                <p>{pomoosQty}</p>
 
-                <button>
+                <button
+                  disabled={pomoosQty >= 12}
+                  onClick={() => setPomoosQty(pomoosQty + 1)}
+                >
                   <PlusIcon />
                 </button>
               </PomooEdit>
