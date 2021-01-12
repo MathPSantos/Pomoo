@@ -5,7 +5,7 @@
   A open source pomodoro timer made for everyone!
   </p>
   <p align="center">
-  <a href="https://pomoo.vercel.app/">See alive! 😁</a>
+  <a href="https://pomoo.vercel.app/">See live! 😁</a>
   </p>
   <p align="center">
     <img src=".github/cover.png" width='900px' />
